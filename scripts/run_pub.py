@@ -1,22 +1,16 @@
-import logging
-import argparse
-from time import time, sleep
-
+from __future__ import print_function
+from time import time
 from zmq_pub_sub import SimpleZMQPublisher
 
 if __name__ == "__main__":
-    logging.getLogger().setLevel(logging.INFO)
-    parser = argparse.ArgumentParser()
-    parser.add_argument('--ip', '-ip', type=str, default='127.0.0.1')
-    parser.add_argument('--port', '-port', type=str, default='5555')
-    parser.add_argument('--topic', '-t', type=str, default='topic')
-    args = parser.parse_args()
+    ip = '127.0.0.1'
+    port = '5555'
+    topic = 'topic'
 
-    pub = SimpleZMQPublisher(args.ip, args.port, args.topic)
+    pub = SimpleZMQPublisher(ip, port, topic)
 
-    logging.info('Running publisher...')
+    print('Running publisher...')
     while True:
         data = {'time': time()}
         pub.push(data)
-        sleep(1e-3)
         
