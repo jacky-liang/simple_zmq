@@ -7,7 +7,7 @@ requirements = [
 ]
 
 setup(name='zmq_pub_sub',
-        version='0.0.1',
+        version='0.1.0',
         author='Jacky Liang',
         author_email='',
         package_dir = {'': '.'},
