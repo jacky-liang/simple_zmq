@@ -1,4 +1,4 @@
-"""Setup script for zmq_pub_sub"""
+"""Setup script for simple_zmq"""
 
 from setuptools import setup
 
@@ -6,11 +6,11 @@ requirements = [
     'zmq'
 ]
 
-setup(name='zmq_pub_sub',
-        version='0.1.0',
+setup(name='simple_zmq',
+        version='0.1.1',
         author='Jacky Liang',
         author_email='',
         package_dir = {'': '.'},
-        packages=['zmq_pub_sub'],
+        packages=['simple_zmq'],
         install_requires=requirements
         )

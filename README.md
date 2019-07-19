@@ -1,6 +1,7 @@
-# Simple ZMQ-based Publisher Subscriber
+# Simple ZMQ-based Python Wrappers
 
-This is a simple publisher / subscriber wrapper for ZMQ.
+This package provides simple wrappers for ZMQ Pub/Sub and Client/Server.
+
 It sends/receives arbitrary python objects by pickling, and it is also compatible with Python 2 and 3.
 
-See `scripts` for examples.
+See `examples` for usage.

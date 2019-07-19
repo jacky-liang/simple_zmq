@@ -1,16 +1,16 @@
 from __future__ import print_function
 from time import time
-from zmq_pub_sub import SimpleZMQPublisher
+from simple_zmq import SimpleZMQClient
 
 if __name__ == "__main__":
     ip = '127.0.0.1'
     port = '5555'
     topic = 'topic'
 
-    pub = SimpleZMQPublisher(ip, port, topic)
+    client = SimpleZMQClient(ip, port)
 
-    print('Running publisher...')
+    print('Running client...')
     while True:
         data = {'time': time()}
-        pub.push(data)
-        
+        rep = client.send(data)
+        print(rep)        

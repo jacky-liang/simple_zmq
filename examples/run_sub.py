@@ -1,5 +1,5 @@
 from __future__ import print_function
-from zmq_pub_sub import SimpleZMQSubscriber
+from simple_zmq import SimpleZMQSubscriber
 
 if __name__ == "__main__":
     ip = '127.0.0.1'
