@@ -14,7 +14,10 @@ class SimpleZMQPublisher:
 
     def push(self, data):
         msg = data_to_msg(data)
-        self._socket.send_string('{} {}'.format(self._topic, msg))
+        self.push_raw(msg)
+
+    def push_raw(self, raw_msg):
+        self._socket.send_string('{} {}'.format(self._topic, raw_msg))
 
 
 class SimpleZMQSubscriber:

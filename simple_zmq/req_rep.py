@@ -3,7 +3,6 @@ from pickle import dumps, loads
 
 from .utils import msg_to_data, data_to_msg
 
-
 class SimpleZMQClient:
 
     def __init__(self, ip, port):
@@ -11,10 +10,12 @@ class SimpleZMQClient:
         self._socket.connect('tcp://{}:{}'.format(ip, port))
 
     def send(self, data):
-        self._socket.send_string(data_to_msg(data))
+        return self.send_raw(data_to_msg(data))
+
+    def send_raw(self, raw_msg):
+        self._socket.send_string(raw_msg)
         rep_msg = self._socket.recv_string()
         return msg_to_data(rep_msg)
-
 
 class SimpleZMQServer:
 
