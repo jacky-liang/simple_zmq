@@ -35,6 +35,17 @@ class SimpleZMQSubscriber:
 
         self._topic = topic
 
-    def get(self):
-        msg = self._socket.recv_string()[len(self._topic) + 1:]
+    def get(self, block=True):
+        if block:
+            raw_msg = self._socket.recv_string()
+        else:
+            try:
+                raw_msg = self._socket.recv_string(zmq.NOBLOCK)
+            except zmq.ZMQError as e:
+                if e.errno == zmq.EAGAIN:
+                    return None
+                else:
+                    raise(e)
+        
+        msg = raw_msg[len(self._topic) + 1:]
         return msg_to_data(msg)

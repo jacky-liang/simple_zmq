@@ -7,7 +7,7 @@ requirements = [
 ]
 
 setup(name='simple_zmq',
-        version='0.1.2',
+        version='0.1.3',
         author='Jacky Liang',
         author_email='',
         package_dir = {'': '.'},
