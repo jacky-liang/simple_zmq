@@ -12,12 +12,13 @@ class SimpleZMQPublisher:
 
         self._topic = topic
 
-    def push(self, data):
-        msg = data_to_msg(data)
-        self.push_raw(msg)
+    def push(self, data, raw=False):
+        if raw:
+            msg = data
+        else:
+            msg = data_to_msg(data)
 
-    def push_raw(self, raw_msg):
-        self._socket.send_string('{} {}'.format(self._topic, raw_msg))
+        self._socket.send_string('{} {}'.format(self._topic, msg))
 
 
 class SimpleZMQSubscriber:
@@ -35,7 +36,7 @@ class SimpleZMQSubscriber:
 
         self._topic = topic
 
-    def get(self, block=True):
+    def get(self, raw=False, block=True):
         if block:
             raw_msg = self._socket.recv_string()
         else:
@@ -48,4 +49,6 @@ class SimpleZMQSubscriber:
                     raise(e)
         
         msg = raw_msg[len(self._topic) + 1:]
+        if raw:
+            return msg
         return msg_to_data(msg)
