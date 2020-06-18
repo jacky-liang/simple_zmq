@@ -1,5 +1,4 @@
 import zmq
-from pickle import dumps, loads
 
 from .utils import data_to_msg, msg_to_data
 

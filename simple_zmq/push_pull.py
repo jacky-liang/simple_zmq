@@ -1,7 +1,7 @@
 import zmq
-from pickle import dumps, loads
 
 from .utils import msg_to_data, data_to_msg
+
 
 class SimpleZMQProducer:
 
@@ -9,11 +9,12 @@ class SimpleZMQProducer:
         self._socket = zmq.Context().socket(zmq.PUSH)
         self._socket.bind('tcp://{}:{}'.format(ip, port))
 
-    def push(self, data):
-        self.push_raw(data_to_msg(data))
-
-    def push_raw(self, raw_msg):
-        self._socket.send_string(raw_msg)
+    def push(self, data, raw=False):
+        if raw:
+            msg = data
+        else:
+            msg = data_to_msg(data)
+        self._socket.send_string(msg)
 
 
 class SimpleZMQCollector:
