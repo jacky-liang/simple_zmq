@@ -24,6 +24,9 @@ class SimpleZMQCollector:
         self._socket.setsockopt(zmq.CONFLATE, buffer_len)
         self._socket.connect('tcp://{}:{}'.format(ip, port))
 
-    def get(self):
+    def get(self, raw=False):
         msg = self._socket.recv_string()
+
+        if raw:
+            return msg
         return msg_to_data(msg)
