@@ -15,6 +15,7 @@ class SimpleZMQClient:
         else:
             msg = data_to_msg(data)
 
+        self._socket.send_string(msg)
         rep_msg = self._socket.recv_string()
         if raw:
             return rep_msg

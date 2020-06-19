@@ -5,7 +5,6 @@ from simple_zmq import SimpleZMQServer
 if __name__ == "__main__":
     ip = '127.0.0.1'
     port = '5555'
-    topic = 'topic'
 
     server = SimpleZMQServer(ip, port)
 
