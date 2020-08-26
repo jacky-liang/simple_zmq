@@ -5,9 +5,9 @@ from .utils import data_to_msg, msg_to_data
 
 class SimpleZMQPublisher:
 
-    def __init__(self, ip, port, topic):
+    def __init__(self, ip, port, topic, protocol='tcp'):
         self._socket = zmq.Context().socket(zmq.PUB)
-        self._socket.bind('tcp://{}:{}'.format(ip, port))
+        self._socket.bind('{}://{}:{}'.format(protocol, ip, port))
 
         self._topic = topic
 
@@ -22,7 +22,7 @@ class SimpleZMQPublisher:
 
 class SimpleZMQSubscriber:
 
-    def __init__(self, ip, port, topic, buffer_len=1):
+    def __init__(self, ip, port, topic, buffer_len=1, protocol='tcp'):
         self._socket = zmq.Context().socket(zmq.SUB)
         self._socket.setsockopt(zmq.CONFLATE, 1)
 
@@ -31,7 +31,7 @@ class SimpleZMQSubscriber:
         except:
             self._socket.setsockopt(zmq.SUBSCRIBE, b'{}'.format(topic))
 
-        self._socket.connect('tcp://{}:{}'.format(ip, port))
+        self._socket.connect('{}://{}:{}'.format(protocol, ip, port))
 
         self._topic = topic
 
